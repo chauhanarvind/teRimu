@@ -1,0 +1,25 @@
+.container {
+  /* border: 1px solid; */
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-box {
+  height: 500px;
+  width: 500px;
+}
+.dialogue-box {
+  height: 500px;
+  width: 500px;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.p-elements {
+  width: fit-content;
+  /* border: 1px solid green; */
+  height: fit-content;
+}
