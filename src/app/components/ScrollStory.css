@@ -4,6 +4,21 @@ body {
   background-color: #fdfaf6;
   color: #333;
   line-height: 1.6;
+  transition: background 0.5s ease-in-out;
+}
+
+/* Act-specific gradient backgrounds */
+body.act-one {
+  background: linear-gradient(#f1ffe9, #ffffff);
+}
+body.act-two {
+  background: linear-gradient(#fff5f5, #ffffff);
+}
+body.act-three {
+  background: linear-gradient(#e6f3ff, #ffffff);
+}
+body.act-four {
+  background: linear-gradient(#f9f9d1, #ffffff);
 }
 
 /* Container holding each act */
@@ -12,6 +27,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 60px;
+  position: relative;
 }
 
 /* Headings per act */
@@ -23,13 +39,26 @@ body {
   color: #2d3c4c;
 }
 
-/* Wrapper for each image + dialogue */
+/* Chapter marker */
+.chapter-marker {
+  position: sticky;
+  top: 0;
+  background: #ffffffc7;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 6px;
+  z-index: 5;
+  font-style: italic;
+}
+
+/* Overlay wrapper for image + dialogue */
 .overlay-container {
   position: relative;
   margin: 40px 0;
 }
 
-/* Image display */
+/* Image styling */
 .image-box {
   height: auto;
   width: 100%;
@@ -47,7 +76,31 @@ body {
   transform: scale(1.02);
 }
 
-/* Dialogue bubble overlay */
+/* Floating decoration (leaf, etc.) */
+.floating-leaf {
+  position: fixed;
+  top: 10%;
+  left: 70%;
+  width: 60px;
+  opacity: 0.1;
+  animation: floatY 6s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Dialogue overlay */
 .dialogue-box {
   position: absolute;
   bottom: 20px;
@@ -81,48 +134,67 @@ body {
   border-color: transparent transparent white transparent;
 }
 
-/* Speaker-specific styles */
+/* Speaker name styles */
 .narrator {
   font-weight: bold;
   color: #1e8449;
 }
-
 .elder {
   font-weight: bold;
   color: #8e44ad;
 }
-
 .child {
   font-weight: bold;
   color: #f39c12;
 }
-
 .teRimu {
   font-weight: bold;
   color: #2980b9;
 }
-
 .aroha {
   font-weight: bold;
   color: #c0392b;
 }
-
 .tawa {
   font-weight: bold;
   color: #6c3483;
 }
-
 .warrior {
   font-weight: bold;
   color: #5d6d7e;
 }
-
 .children {
   font-weight: bold;
   color: #16a085;
 }
 
-/* Responsive tweaks */
+/* Speaker-based bubble colors */
+.p-elements.narrator {
+  background-color: #e8f5e9;
+}
+.p-elements.elder {
+  background-color: #ede7f6;
+}
+.p-elements.child {
+  background-color: #fff8e1;
+}
+.p-elements.teRimu {
+  background-color: #e3f2fd;
+}
+.p-elements.aroha {
+  background-color: #fce4ec;
+}
+.p-elements.tawa {
+  background-color: #e8f8f5;
+}
+.p-elements.children {
+  background-color: #f1f8e9;
+}
+.p-elements.warrior {
+  background-color: #f9fbe7;
+}
+
+/* Responsive adjustments */
 @media (max-width: 500px) {
   .container {
     width: 90%;
@@ -140,5 +212,17 @@ body {
 
   .act-heading {
     font-size: 1.4rem;
+  }
+}
+
+@keyframes floatY {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

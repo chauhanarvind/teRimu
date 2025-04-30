@@ -1,8 +1,10 @@
 "use client";
+import { useEffect } from "react";
 import DialogueBox from "./DialogueBox";
 import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function ActFour() {
   const dialogues = [
@@ -48,9 +50,29 @@ export default function ActFour() {
     },
   ];
 
+  // 🎨 Apply background for this act
+  useEffect(() => {
+    document.body.className = "act-four";
+    return () => {
+      document.body.className = "";
+    };
+  }, []);
+
   return (
     <div className="container">
+      {/* 📖 Chapter Marker */}
+      <div className="chapter-marker">Chapter 4</div>
+
       <h2 className="act-heading">A Call to Action</h2>
+
+      {/* 🍃 Floating decorative element */}
+      <Image
+        src="/assets/EnvironmentalElements/Unnamed Image Apr 29 2025 (1).png"
+        alt="leaf"
+        width={60}
+        height={60}
+        className="floating-leaf"
+      />
 
       {dialogues.map((value, index) => (
         <motion.div

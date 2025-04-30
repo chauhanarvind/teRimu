@@ -1,8 +1,10 @@
 "use client";
+import { useEffect } from "react";
 import DialogueBox from "./DialogueBox";
 import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function ActThree() {
   const dialogues = [
@@ -38,9 +40,29 @@ export default function ActThree() {
     },
   ];
 
+  // 🎨 Set act-specific background
+  useEffect(() => {
+    document.body.className = "act-three";
+    return () => {
+      document.body.className = "";
+    };
+  }, []);
+
   return (
     <div className="container">
+      {/* 📖 Chapter Marker */}
+      <div className="chapter-marker">Chapter 3</div>
+
       <h2 className="act-heading">Aroha’s Discovery</h2>
+
+      {/* 🍂 Floating leaf decoration */}
+      <Image
+        src="/assets/EnvironmentalElements/Unnamed Image Apr 29 2025 (1).png"
+        alt="leaf"
+        width={60}
+        height={60}
+        className="floating-leaf"
+      />
 
       {dialogues.map((value, index) => (
         <motion.div

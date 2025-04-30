@@ -8,13 +8,13 @@ type DialogueBoxProps = {
 };
 
 export default function DialogueBox({ dialogue }: DialogueBoxProps) {
+  if (!dialogue.text) return null;
+
   return (
     <div className="dialogue-box">
-      {dialogue.speaker && (
-        <div className="p-elements">
-          <p className={dialogue.speaker || ""}>{dialogue.text}</p>
-        </div>
-      )}
+      <div className={`p-elements ${dialogue.speaker || ""}`}>
+        <p>{dialogue.text}</p>
+      </div>
     </div>
   );
 }
