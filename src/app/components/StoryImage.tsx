@@ -10,12 +10,18 @@ type StoryImageProps = {
 export default function StoryImage({
   src,
   alt,
-  width = 500,
-  height = 500,
+  width = 400,
+  height = 400,
 }: StoryImageProps) {
   return (
     <div className="image-box">
-      <Image src={src} alt={alt} width={width} height={height} />
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        objectFit="contain"
+      />
     </div>
   );
 }

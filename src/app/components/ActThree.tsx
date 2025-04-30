@@ -2,26 +2,26 @@ import DialogueBox from "./DialogueBox";
 import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
 
-export default function ActOne() {
+export default function ActThree() {
   const dialogues = [
     {
       speaker: "narrator",
-      text: "Long ago, the Waioweka River sparkled with life. Birds sang, trees danced, and the water whispered softly.",
+      text: "Years passed. The forest faded. The river turned grey and quiet.",
       image: "/narrator.png",
     },
     {
-      speaker: "elder",
-      text: "Te Rimu watches over us. He is the spirit of the river. Respect the water, and it will care for us in return.",
-      image: "/elder.png",
+      speaker: "aroha",
+      text: "Why is the water so dirty? What’s this... a blinking piece of wood?",
+      image: "/aroha.png",
     },
     {
-      speaker: "child",
-      text: "Look! A log floats by… wait—did it blink?",
-      image: "/child.png",
+      speaker: "teRimu",
+      text: "Aroha... help... protect...",
+      image: "/teRimu.png",
     },
     {
       speaker: "narrator",
-      text: "Te Rimu sometimes takes the shape of a log… or an eel. He is always watching, always listening.",
+      text: "Aroha listened. A story had found her. A new chapter was about to begin.",
       image: "/narrator.png",
     },
   ];
