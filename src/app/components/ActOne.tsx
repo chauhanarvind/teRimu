@@ -1,6 +1,8 @@
+"use client";
 import DialogueBox from "./DialogueBox";
 import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
+import { motion } from "framer-motion";
 
 export default function ActOne() {
   const dialogues = [
@@ -24,7 +26,6 @@ export default function ActOne() {
       text: "Look! A log floats by… wait—did it blink?",
       image: "/child.png",
     },
-
     {
       speaker: "",
       text: "",
@@ -44,12 +45,20 @@ export default function ActOne() {
 
   return (
     <div className="container">
-      <h2 className="act-heading">Life in the 18th century</h2>
+      <h2 className="act-heading">Life in the 18th Century</h2>
+
       {dialogues.map((value, index) => (
-        <div className="overlay-container" key={index}>
+        <motion.div
+          className="overlay-container"
+          key={index}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: index * 0.1 }}
+        >
           <StoryImage src={value.image} alt={`Story image ${index + 1}`} />
           <DialogueBox dialogue={value} />
-        </div>
+        </motion.div>
       ))}
     </div>
   );
