@@ -10,7 +10,7 @@
   width: 500px;
 }
 .dialogue-box {
-  height: 500px;
+  height: auto;
   width: 500px;
   /* border: 1px solid red; */
   display: flex;
@@ -19,7 +19,15 @@
 }
 
 .p-elements {
+  margin: 50px;
   width: fit-content;
   /* border: 1px solid green; */
   height: fit-content;
+  text-align: justify;
+}
+
+.narrator {
+  font-size: medium;
+  font-weight: bolder;
+  color: green;
 }
