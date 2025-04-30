@@ -226,3 +226,32 @@ body.act-four {
     transform: translateY(0);
   }
 }
+
+.floating-decor-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-decor {
+  position: absolute;
+  opacity: 0.15;
+  animation: floatDecor 8s ease-in-out infinite;
+  transition: top 1.5s ease, left 1.5s ease;
+}
+
+@keyframes floatDecor {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
