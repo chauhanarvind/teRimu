@@ -8,11 +8,12 @@
 .image-box {
   height: 500px;
   width: 500px;
+  border: 1px solid;
 }
 .dialogue-box {
   height: auto;
   width: 500px;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: space-around;
