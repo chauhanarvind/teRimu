@@ -1,14 +1,19 @@
-import ActFour from "./ActFour";
+"use client";
+
 import ActOne from "./ActOne";
-import ActThree from "./ActThree";
 import ActTwo from "./ActTwo";
+import ActThree from "./ActThree";
+import ActFour from "./ActFour";
 import FloatingDecor from "./FloatDecor";
 import "./ScrollStory.css";
 
 export default function ScrollStory() {
   return (
     <>
+      {/* 🍃 Floating elements outside content flow */}
       <FloatingDecor />
+
+      {/* 📖 Scrollable storytelling content */}
       <div className="main-container">
         <ActOne />
         <ActTwo />

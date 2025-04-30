@@ -1,10 +1,10 @@
 "use client";
+
 import { useEffect } from "react";
 import DialogueBox from "./DialogueBox";
 import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export default function ActOne() {
   const dialogues = [
@@ -45,7 +45,7 @@ export default function ActOne() {
     },
   ];
 
-  // 🎨 Apply act-specific background
+  // 🍃 Apply Act 1 background on mount
   useEffect(() => {
     document.body.className = "act-one";
     return () => {
@@ -59,15 +59,7 @@ export default function ActOne() {
       <div className="chapter-marker">Chapter 1</div>
       <h2 className="act-heading">Life in the 18th Century</h2>
 
-      {/* 🍃 Floating decorative element */}
-      <Image
-        src="/assets/EnvironmentalElements/Unnamed Image Apr 29 2025 (1).png"
-        alt="leaf"
-        width={60}
-        height={60}
-        className="floating-leaf"
-      />
-      {/* Story scenes with animation */}
+      {/* 🖼️ Animated storytelling cards */}
       {dialogues.map((value, index) => (
         <motion.div
           className="overlay-container"

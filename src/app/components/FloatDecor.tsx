@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -51,7 +52,7 @@ const elements: ElementType[] = [
 
 function getTopRange(name: string): [number, number] {
   if (name === "bird") return [5, 20];
-  if (["tree", "plant"].includes(name)) return [70, 90];
+  if (["tree", "plant"].includes(name)) return [75, 90];
   if (["grass", "bush", "duck", "flower"].includes(name)) return [80, 95];
   return [40, 70];
 }
@@ -69,7 +70,6 @@ export default function FloatingDecor() {
         id: `${el.name}-${i}`,
       };
     });
-
     setDecorations(placed);
   }, []);
 
@@ -80,8 +80,8 @@ export default function FloatingDecor() {
           key={item.id}
           src={item.src}
           alt={item.name}
-          width={60}
-          height={60}
+          width={70}
+          height={70}
           className="floating-decor"
           style={{
             top: `${item.top}%`,
