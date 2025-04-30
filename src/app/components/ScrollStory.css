@@ -53,6 +53,10 @@ body.act-four {
   font-style: italic;
 }
 
+.card {
+  border: 1px solid;
+}
+
 .overlay-container {
   position: relative;
   margin: 40px 0;
@@ -110,7 +114,7 @@ body.act-four {
 /* Dialogue overlay */
 .dialogue-box {
   position: absolute;
-  bottom: 20px;
+  bottom: 60px;
   left: 20px;
   right: 20px;
   display: flex;
