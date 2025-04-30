@@ -10,6 +10,11 @@ export default function ActTwo() {
       image: "/narrator.png",
     },
     {
+      speaker: "",
+      text: "",
+      image: "/assets/VisualElements/2_invaders3.png",
+    },
+    {
       speaker: "teRimu",
       text: "They harm the land... I must rise.",
       image: "/teRimu.png",
@@ -20,6 +25,11 @@ export default function ActTwo() {
       image: "/warrior.png",
     },
     {
+      speaker: "",
+      text: "",
+      image: "/assets/VisualElements/1_MarriPeople.png",
+    },
+    {
       speaker: "narrator",
       text: "From the river’s depths, Te Rimu surged up, waves crashing. Nature itself stood beside the people.",
       image: "/narrator.png",
@@ -28,6 +38,7 @@ export default function ActTwo() {
 
   return (
     <div className="container">
+      <h2 className="act-heading">Foriegn Invasion</h2>
       {dialogues.map((value, index) => (
         <div className="overlay-container" key={index}>
           <StoryImage src={value.image} alt={`Story image ${index + 1}`} />

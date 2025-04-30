@@ -9,10 +9,16 @@ export default function ActFour() {
       text: "The river is sick. But we can help. Who will join me?",
       image: "/tawa.png",
     },
+
     {
       speaker: "children",
       text: "We will!",
-      image: "/children.png",
+      image: "/assets/VisualElements/4_Cleaning Group.png",
+    },
+    {
+      speaker: "",
+      text: "",
+      image: "/assets/VisualElements/4_Cleaning 2.png",
     },
     {
       speaker: "narrator",
@@ -20,9 +26,19 @@ export default function ActFour() {
       image: "/narrator.png",
     },
     {
+      speaker: "",
+      text: "",
+      image: "/assets/VisualElements/4_Cleaning.png",
+    },
+    {
       speaker: "aroha",
       text: "Te Rimu... can you see? We’re trying. We’re learning.",
       image: "/aroha.png",
+    },
+    {
+      speaker: "",
+      text: "",
+      image: "/assets/VisualElements/teRimu.png",
     },
     {
       speaker: "narrator",
@@ -33,6 +49,7 @@ export default function ActFour() {
 
   return (
     <div className="container">
+      <h2 className="act-heading">A call to action</h2>
       {dialogues.map((value, index) => (
         <div className="overlay-container" key={index}>
           <StoryImage src={value.image} alt={`Story image ${index + 1}`} />

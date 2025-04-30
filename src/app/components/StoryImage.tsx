@@ -15,13 +15,7 @@ export default function StoryImage({
 }: StoryImageProps) {
   return (
     <div className="image-box">
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        objectFit="contain"
-      />
+      <Image src={src} alt={alt} width={width} height={height} />
     </div>
   );
 }
