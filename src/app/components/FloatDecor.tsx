@@ -58,43 +58,20 @@ function getTopRange(name: string): [number, number] {
 
 export default function FloatingDecor() {
   const [decorations, setDecorations] = useState<PositionedElement[]>([]);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    const generate = () =>
-      elements.slice(0, 10).map((el, i) => {
-        const [min, max] = getTopRange(el.name);
-        return {
-          ...el,
-          top: Math.random() * (max - min) + min,
-          left: Math.random() * 90,
-          id: `${el.name}-${i}`,
-        };
-      });
+    const placed = elements.map((el, i) => {
+      const [min, max] = getTopRange(el.name);
+      return {
+        ...el,
+        top: Math.random() * (max - min) + min,
+        left: Math.random() * 90,
+        id: `${el.name}-${i}`,
+      };
+    });
 
-    setDecorations(generate());
-
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      if (Math.abs(currentY - lastScrollY) > 500) {
-        // update only if scroll delta is significant
-        setLastScrollY(currentY);
-        setDecorations((prev) =>
-          prev.map((el) => {
-            const [min, max] = getTopRange(el.name);
-            return {
-              ...el,
-              top: Math.random() * (max - min) + min,
-              left: Math.random() * 90,
-            };
-          })
-        );
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+    setDecorations(placed);
+  }, []);
 
   return (
     <div className="floating-decor-wrapper">
@@ -103,8 +80,8 @@ export default function FloatingDecor() {
           key={item.id}
           src={item.src}
           alt={item.name}
-          width={40}
-          height={40}
+          width={60}
+          height={60}
           className="floating-decor"
           style={{
             top: `${item.top}%`,

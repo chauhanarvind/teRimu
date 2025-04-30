@@ -9,7 +9,7 @@ export default function ScrollStory() {
   return (
     <>
       <FloatingDecor />
-      <div className="container">
+      <div className="main-container">
         <ActOne />
         <ActTwo />
         <ActThree />

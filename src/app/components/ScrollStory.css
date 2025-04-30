@@ -26,8 +26,9 @@ body.act-four {
   width: 400px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
   position: relative;
+  z-index: 1;
 }
 
 /* Headings per act */
@@ -52,10 +53,16 @@ body.act-four {
   font-style: italic;
 }
 
-/* Overlay wrapper for image + dialogue */
 .overlay-container {
   position: relative;
   margin: 40px 0;
+  padding: 20px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.25); /* semi-transparent */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px); /* softens the act bg */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  z-index: 1;
 }
 
 /* Image styling */
@@ -239,7 +246,7 @@ body.act-four {
 
 .floating-decor {
   position: absolute;
-  opacity: 0.15;
+  opacity: 0.1;
   animation: floatDecor 8s ease-in-out infinite;
   transition: top 1.5s ease, left 1.5s ease;
 }
@@ -254,4 +261,8 @@ body.act-four {
   100% {
     transform: translateY(0);
   }
+}
+
+.overlay-container {
+  transition: background-color 0.4s ease-in-out, box-shadow 0.4s ease;
 }
