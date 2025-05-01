@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import DialogueBox from "./DialogueBox";
-import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
 import { motion } from "framer-motion";
 
 export default function ActFour() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const dialogues = [
     {
       speaker: "tawa",
@@ -50,21 +52,57 @@ export default function ActFour() {
     },
   ];
 
-  // 🌿 Set act-specific background
   useEffect(() => {
     document.body.className = "act-four";
+
+    const handleScroll = () => {
+      if (!audioRef.current || !containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (inView) {
+        if (audioRef.current.paused) {
+          audioRef.current.muted = false;
+          audioRef.current.play().catch(() => {});
+        }
+      } else {
+        audioRef.current.pause();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       document.body.className = "";
+      audioRef.current?.pause();
+      audioRef.current!.currentTime = 0;
     };
   }, []);
 
   return (
-    <div className="container">
-      {/* 📖 Chapter Marker */}
+    <div className="container" ref={containerRef}>
+      {/* Ambient audio */}
+      <audio ref={audioRef} src="/audio/act4.mp3" loop muted />
+
+      {/* Chapter marker */}
       <div className="chapter-marker">Chapter 4</div>
       <h2 className="act-heading">A Call to Action</h2>
 
-      {/* 📜 Story Scenes */}
+      {/* Fact bubble */}
+      <div className="fact-bubble">
+        🧠 Kids across NZ are joining river cleanups! <br />
+        <a
+          href="https://www.facebook.com/groups/mightywaikatorivercleanup/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more →
+        </a>
+      </div>
+
       {dialogues.map((value, index) => (
         <motion.div
           className="overlay-container"
@@ -78,18 +116,6 @@ export default function ActFour() {
           <DialogueBox dialogue={value} />
         </motion.div>
       ))}
-
-      <div className="fact-bubble">
-        🧠 Youth groups now monitor NZ rivers via citizen science.
-        <br />
-        <a
-          href="https://www.niwa.co.nz/freshwater-and-estuaries/tools-and-resources/nz-water-citizen-science"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Explore →
-        </a>
-      </div>
     </div>
   );
 }

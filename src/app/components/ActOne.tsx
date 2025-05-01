@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import DialogueBox from "./DialogueBox";
-import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
 import { motion } from "framer-motion";
 
 export default function ActOne() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const dialogues = [
     {
       speaker: "narrator",
@@ -45,21 +47,58 @@ export default function ActOne() {
     },
   ];
 
-  // 🍃 Apply Act 1 background on mount
   useEffect(() => {
     document.body.className = "act-one";
+
+    const handleScroll = () => {
+      if (!audioRef.current || !containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (inView) {
+        if (audioRef.current.paused) {
+          audioRef.current.muted = false;
+          audioRef.current.play().catch(() => {});
+        }
+      } else {
+        audioRef.current.pause();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // check on load
+
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       document.body.className = "";
+      audioRef.current?.pause();
+      audioRef.current!.currentTime = 0;
     };
   }, []);
 
   return (
-    <div className="container">
-      {/* 📖 Chapter Marker */}
+    <div className="container" ref={containerRef}>
+      {/* Ambient audio (muted initially) */}
+      <audio ref={audioRef} src="/audio/act1.wav" loop muted />
+
+      {/* Chapter Marker */}
       <div className="chapter-marker">Chapter 1</div>
       <h2 className="act-heading">Life in the 18th Century</h2>
 
-      {/* 🖼️ Animated storytelling cards */}
+      {/* Fact bubble */}
+      <div className="fact-bubble">
+        🧠 Did you know? Māori see rivers as ancestors. <br />
+        <a
+          href="https://www.learnz.org.nz/rivers201/discover/importance-rivers-m%C4%81ori#:~:text=their%20water%20bodies.-,M%C4%81ori%20identity%20is%20linked%20to%20rivers.,been%20with%20us%20throughout%20history."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more →
+        </a>
+      </div>
+
+      {/* Story Content */}
       {dialogues.map((value, index) => (
         <motion.div
           className="overlay-container"
@@ -73,18 +112,6 @@ export default function ActOne() {
           <DialogueBox dialogue={value} />
         </motion.div>
       ))}
-
-      <div className="fact-bubble">
-        🧠 Did you know? Māori see rivers as ancestors.
-        <br />
-        <a
-          href="https://teara.govt.nz/en/freshwater-ecosystems"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn more →
-        </a>
-      </div>
     </div>
   );
 }

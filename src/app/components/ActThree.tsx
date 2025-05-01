@@ -1,27 +1,36 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import DialogueBox from "./DialogueBox";
-import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
 import { motion } from "framer-motion";
 
 export default function ActThree() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const dialogues = [
     {
       speaker: "narrator",
       text: "Years passed. The forest faded. The river turned grey and quiet.",
       image: "/narrator.png",
     },
-    {
-      speaker: "",
-      text: "",
-      image: "/assets/VisualElements/3_Unnamed Image Apr 29 2025 (5).png",
-    },
+
     {
       speaker: "aroha",
       text: "Why is the water so dirty? What’s this... a blinking piece of wood?",
       image: "/aroha.png",
+    },
+
+    {
+      speaker: "",
+      text: "",
+      image: "/assets/VisualElements/3_Unnamed Image Apr 29 2025 (8).png",
+    },
+    {
+      speaker: "",
+      text: "",
+      image: "/assets/VisualElements/3_Unnamed Image Apr 29 2025 (5).png",
     },
     {
       speaker: "",
@@ -31,7 +40,7 @@ export default function ActThree() {
     {
       speaker: "teRimu",
       text: "Aroha... help... protect...",
-      image: "/teRimu.png",
+      image: "/assets/VisualElements/3_Taniwha.png",
     },
     {
       speaker: "narrator",
@@ -40,21 +49,57 @@ export default function ActThree() {
     },
   ];
 
-  // 🌊 Set act-specific background
   useEffect(() => {
     document.body.className = "act-three";
+
+    const handleScroll = () => {
+      if (!audioRef.current || !containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (inView) {
+        if (audioRef.current.paused) {
+          audioRef.current.muted = false;
+          audioRef.current.play().catch(() => {});
+        }
+      } else {
+        audioRef.current.pause();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       document.body.className = "";
+      audioRef.current?.pause();
+      audioRef.current!.currentTime = 0;
     };
   }, []);
 
   return (
-    <div className="container">
-      {/* 📖 Chapter Marker */}
+    <div className="container" ref={containerRef}>
+      {/* Ambient audio */}
+      <audio ref={audioRef} src="/audio/act3.mp3" loop muted />
+
+      {/* Chapter marker */}
       <div className="chapter-marker">Chapter 3</div>
       <h2 className="act-heading">Aroha’s Discovery</h2>
 
-      {/* 🧩 Story slides */}
+      {/* Fact bubble */}
+      <div className="fact-bubble">
+        🧠 Many NZ rivers are at risk due to farming runoff. <br />
+        <a
+          href="https://ehinz.ac.nz/indicators/water/recreational-water/agriculture/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more →
+        </a>
+      </div>
+
       {dialogues.map((value, index) => (
         <motion.div
           className="overlay-container"
@@ -68,18 +113,6 @@ export default function ActThree() {
           <DialogueBox dialogue={value} />
         </motion.div>
       ))}
-
-      <div className="fact-bubble">
-        🧠 Waioweka River’s water clarity dropped over time.
-        <br />
-        <a
-          href="https://www.lawa.org.nz/explore-data/bay-of-plenty-region/river-quality/waioweka"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          See data →
-        </a>
-      </div>
     </div>
   );
 }

@@ -10,10 +10,10 @@ import "./ScrollStory.css";
 export default function ScrollStory() {
   return (
     <>
-      {/* 🍃 Floating elements outside content flow */}
+      {/* Floating elements outside content flow */}
       <FloatingDecor />
 
-      {/* 📖 Scrollable storytelling content */}
+      {/* Scrollable storytelling content */}
       <div className="main-container">
         <ActOne />
         <ActTwo />

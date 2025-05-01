@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import DialogueBox from "./DialogueBox";
-import "./ScrollStory.css";
 import StoryImage from "./StoryImage";
 import { motion } from "framer-motion";
 
 export default function ActTwo() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const dialogues = [
     {
       speaker: "narrator",
@@ -40,19 +42,56 @@ export default function ActTwo() {
     },
   ];
 
-  // 🔥 Set act-specific background
   useEffect(() => {
     document.body.className = "act-two";
+
+    const handleScroll = () => {
+      if (!audioRef.current || !containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (inView) {
+        if (audioRef.current.paused) {
+          audioRef.current.muted = false;
+          audioRef.current.play().catch(() => {});
+        }
+      } else {
+        audioRef.current.pause();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // initial check
+
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       document.body.className = "";
+      audioRef.current?.pause();
+      audioRef.current!.currentTime = 0;
     };
   }, []);
 
   return (
-    <div className="container">
-      {/* 📖 Chapter Marker */}
+    <div className="container" ref={containerRef}>
+      {/* audio */}
+      <audio ref={audioRef} src="/audio/act2.mp3" loop muted />
+
+      {/* Chapter marker */}
       <div className="chapter-marker">Chapter 2</div>
       <h2 className="act-heading">Foreign Invasion</h2>
+
+      {/* Fact bubble */}
+      <div className="fact-bubble">
+        🧠 Logging & colonization caused mass deforestation in NZ. <br />
+        <a
+          href="https://teara.govt.nz/en/interactive/11674/deforestation-of-new-zealand#:~:text=By%20the%20time%20European%20settlement,easily%20accessible%20conifer%E2%80%93broadleaf%20forest."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read more →
+        </a>
+      </div>
 
       {dialogues.map((value, index) => (
         <motion.div
@@ -67,18 +106,6 @@ export default function ActTwo() {
           <DialogueBox dialogue={value} />
         </motion.div>
       ))}
-
-      <div className="fact-bubble">
-        🧠 Waioweka River’s water clarity dropped over time.
-        <br />
-        <a
-          href="https://www.lawa.org.nz/explore-data/bay-of-plenty-region/river-quality/waioweka"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          See data →
-        </a>
-      </div>
     </div>
   );
 }
