@@ -67,6 +67,18 @@ export default function ActTwo() {
           <DialogueBox dialogue={value} />
         </motion.div>
       ))}
+
+      <div className="fact-bubble">
+        🧠 Waioweka River’s water clarity dropped over time.
+        <br />
+        <a
+          href="https://www.lawa.org.nz/explore-data/bay-of-plenty-region/river-quality/waioweka"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          See data →
+        </a>
+      </div>
     </div>
   );
 }

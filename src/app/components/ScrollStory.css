@@ -256,3 +256,23 @@ body.act-four {
     font-size: 1.4rem;
   }
 }
+
+.fact-bubble {
+  max-width: 400px;
+  /* border: 1px solid red; */
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
+  font-size: 0.75rem;
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  line-height: 1.4;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.fact-bubble a {
+  color: #1a73e8;
+  text-decoration: underline;
+  font-weight: 500;
+}

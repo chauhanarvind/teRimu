@@ -73,6 +73,18 @@ export default function ActOne() {
           <DialogueBox dialogue={value} />
         </motion.div>
       ))}
+
+      <div className="fact-bubble">
+        🧠 Did you know? Māori see rivers as ancestors.
+        <br />
+        <a
+          href="https://teara.govt.nz/en/freshwater-ecosystems"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more →
+        </a>
+      </div>
     </div>
   );
 }

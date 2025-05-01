@@ -78,6 +78,18 @@ export default function ActFour() {
           <DialogueBox dialogue={value} />
         </motion.div>
       ))}
+
+      <div className="fact-bubble">
+        🧠 Youth groups now monitor NZ rivers via citizen science.
+        <br />
+        <a
+          href="https://www.niwa.co.nz/freshwater-and-estuaries/tools-and-resources/nz-water-citizen-science"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Explore →
+        </a>
+      </div>
     </div>
   );
 }
